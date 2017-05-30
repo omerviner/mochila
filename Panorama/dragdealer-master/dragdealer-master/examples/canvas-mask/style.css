@@ -112,9 +112,9 @@ body {
 #canvas-mask .handle .page .body a{
 	font-family: NarkisBlock;
 	display: block;
-	color:#333;
+	color:white;
 	margin-bottom:5px;
-	font-size: 1.1em;
+	font-size: 1em;
 	text-decoration: none;
 }
 
