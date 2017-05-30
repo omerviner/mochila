@@ -702,7 +702,7 @@ Dragdealer.prototype = {
 	  }
 	  
 	  if (this.offset.current[0] > -800){
-		  console.log(this.offset.current[0]);
+		  //console.log(this.offset.current[0]);
 		  this.offset.current[0] =  this.offset.current[0] - endPixel;
 
 	  }
@@ -713,7 +713,7 @@ Dragdealer.prototype = {
       if (this.options.vertical) {
         transform += ' translateY(' + this.offset.current[1] + 'px)';
       }
-	  console.log(transform);
+	  //console.log(transform);
 
       this.handle.style[StylePrefix.transform] = transform;
       return;

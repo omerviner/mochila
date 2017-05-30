@@ -40,6 +40,7 @@ body {
 }
 
 #canvas-mask .handle .page .menu {
+  display: none;
   position: absolute;
   top: 15px;
   left: 15px;
@@ -56,8 +57,9 @@ body {
 }
 
 #floating-menu {
-	position: fixed;
-	z-index: 1;
+  display: none;
+  position: fixed;
+  z-index: 1;
   bottom: 15px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -72,6 +74,10 @@ body {
   text-decoration: none;
   font-family: NarkisBlock;
   font-size:1.2em;
+}
+
+#floating-menu .chosen {
+	color:blue;
 }
 
 #canvas-mask .handle .page .menu a, #floating-menu a {
@@ -99,8 +105,14 @@ body {
   background: rgba(255, 255, 255, 0);
   color: #000;
   color: rgba(0, 0, 0, 0.75);
-  font-size: 1.3em;
   line-height: 40px;
+  font-family: NarkisBlock;
+}
+
+#canvas-mask .handle .page .body strong{
+	font-size: 1.5em;
+	color: white;
+	font-family: NarkisBlockBold;
 }
 
 @font-face {
@@ -108,18 +120,56 @@ body {
     src: url(fonts/NarkisBlock-Regular.otf);
 }
 
+@font-face {
+    font-family: NarkisBlockBold;
+    src: url(fonts/NarkisBlock-Bold.otf);
+}
+
 
 #canvas-mask .handle .page .body a{
 	font-family: NarkisBlock;
 	display: block;
-	color:white;
+	color:rgba(255,255,255,0.2);
 	margin-bottom:5px;
-	font-size: 1em;
+	font-size: 1.3em;
 	text-decoration: none;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+#canvas-mask .handle .page .body .chosen{
+	color:white;
 }
 
 #canvas-mask .handle .page .body a:hover{
 	text-decoration: underline;
 }
 
+#category-none {
+	width:16.5%;
+	
+}
 
+
+#category-documents {
+	width:14.5%;
+}
+
+#category-general {
+	width:16.5%;
+}
+
+#category-hygene {
+	width:10.6%;
+}
+
+#category-clothes {
+	width:13.5%;
+}
+
+#category-trekking {
+	
+}
+
+#category-other {
+	
+}
