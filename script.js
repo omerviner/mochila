@@ -21,7 +21,7 @@ $(function() {
 	});
 	
 	var canvasMask = new Dragdealer('canvas-mask', {
-		x: 0.5,
+		x: 0.47,
 		// Start in the bottom-left corner
 		y: 1,
 		vertical: false,
