@@ -1,221 +1,133 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>מוצ'ילה</title>
 
-  <!-- FontAwesome -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<meta charset="utf-8">
 
-  <!-- Jquery -->
-  <script src="lib/jquery-1.10.2.js"></script>
+	<title>Parallax.js | Simple Example</title>
 
-  <!-- Dragdealer JS -->
-  <script src="src/dragdealer.js"></script>
-  <!-- Dragdealer CSS -->
-  <link  href="src/dragdealer.css" rel="stylesheet" type="text/css">
+	<!-- Behavioral Meta Data -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <!-- Example script -->
-  <script src="script.js"></script>
-  <!-- Example style -->
-  <link href="style.css" rel="stylesheet" type="text/css">
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="styles.css"/>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 
+	<style>
+		body {
+			background: white;
+		}
+		body {
+			overflow-y: hidden;
+		}
+		svg {
+			overflow: visible  
+			box-shadow : 0px -0px 10000px transparent /*trick for chrome*/
+
+		}
+		div {
+			backface-visibility: visible!important;
+		}
+
+
+	</style>
+	<script>
+
+
+
+		var left = 0;
+		var screenX;
+		var outerWidth;
+		
+		function rollImage(){
+			left = left / (outerWidth/2);
+			left = screenX - (outerWidth/2);
+			left = left / (outerWidth/2);
+			left = left * 30;
+			// ?????
+			var maxScrollLeft = $('body').scrollWidth - $('body').clientWidth;
+			console.log(maxScrollLeft);
+			var leftPosition = $('body').scrollLeft();
+			console.log(leftPosition);
+			if (leftPosition > 15000){
+				$('body').scrollLeft(200);
+			}
+			if (leftPosition < 200){
+				$('body').scrollLeft(15000);
+			}
+			
+			console.log(left);
+			//left = 1;
+			$('html, body').animate({scrollLeft: '+=' + left}, 10);
+			//t=setTimeout("rollImage()",20);
+		}
+		
+		$(document).ready(function() {
+		
+			
+			Compass.noSupport(function () {
+				//rollImage();
+				setInterval(rollImage, 40);
+				$( document ).on( "mousemove", function( event ) {
+				//console.log(window);
+				//console.log('screenX: ' + event.screenX + ' window.width(): ' + window.outerWidth );
+				screenX = event.screenX;
+				outerWidth = window.outerWidth;
+				//rollImage();
+				});
+			});
+
+			Compass.needGPS(function () {
+			  $('.go-outside-message').show();          // Step 1: we need GPS signal
+			}).needMove(function () {
+			  $('.go-outside-message').hide()
+			  $('.move-and-hold-ahead-message').show(); // Step 2: user must go forward
+			}).init(function () {
+			  $('.move-and-hold-ahead-message').hide(); // GPS hack is enabled
+			});
+
+			Compass.watch(function (heading) {
+			  $('html, body').animate({scrollLeft: '=' + (1200 / heading)}, 10);
+
+			});
+
+
+
+		});
+
+
+	</script>
 </head>
 <body>
 
-  <div id="canvas-mask" class="dragdealer">
-  
-  	<p id="floating-menu" class="menu">
-	  <a href="#" data-x="0.2">מסמכים</a> |
-	  <a href="#" data-x="0.355">ציוד כללי</a> |
-	  <a href="#" data-x="0.515">היגיינה</a> |
-	  <a href="#" data-x="0.625">ביגוד</a> | 
-	  <a href="#" data-x="0.73">טראקים</a> |
-	  <a href="#" data-x="0.03">אחר</a>
-	</p>
-	
-    <div class="handle">
-      <div class="page" id="category-none" style="height: 100%;width:19%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-		  <strong>ציוד כללי</strong> |
-          <a href="#" data-x="0" data-y="0">היגיינה</a> |
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> | 
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-		דרכון</br>
-		רשיון נהיגה בין לאומי</br>
-		רשיון נהיגה ישראלי</br>
-		תעודת סטודנט</br>
-		כרטיסי טיסה</br>
-		פוליסת ביטוח נסיעות</br>
-		פנקס חיסונים</br>
-		כרטיס אשראי בין-לאומי</br>
-		ויזה</br>
-		תוויות זיהוי מוצ'ילה</br>
-		טוש</br>
-		שמרדפים עבור המסמכים</br>
-		מספרים חשובים
-        </p>
-      </div>
-	  
-	  
-      <div class="page" id="category-documents" style="height: 100%;width:14%;">
-        <p class="menu">
-          <strong>מסמכים</strong> |
-          <a href="#" data-x="1" data-y="0">ציוד כללי</a> |
-          <a href="#" data-x="0" data-y="0">היגיינה</a> |
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> | 
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-			<strong>מסמכים</strong>
-			<a href="#">דרכון</a>
-			<a href="#">רישיון נהיגה בינלאומי</a>
-			<a href="#">תעודת סטודנט</a>
-			<a href="#">כרטיסי טיסה</a>
-			<a href="#">ביטוח נסיעות</a>
-			<a href="#">פנקס חיסונים</a>
-			<a href="#">כרטיס אשראי בינלאומי</a>
-			<a href="#">ויזה</a>
-			<a href="#">תוויות זיהוי למוצ'ילה</a>
-			<a href="#">טוש</a>
-			<a href="#">שמרדפים עבור המסמכים</a>
-			<a href="#">מספרים חשובים</a>
-        </p>
-      </div>
-	  
-      <div class="page" id="category-general" style="height: 100%;width:14.5%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-		  <strong>ציוד כללי</strong> |
-          <a href="#" data-x="0" data-y="0">היגיינה</a> |
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> | 
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-			<strong>ציוד כללי</strong>
-			<a href="#">כיסוי תרמיל</a>
-			<a href="#">תיק גב קטן</a>
-			<a href="#">מצלמה</a>
-			<a href="#">שעון מעורר</a>
-			<a href="#">שיחון</a>
-			<a href="#">שק כביסה</a>
-			<a href="#">פנקס ועט</a>
-			<a href="#">נגן</a>
-			<a href="#">חגורת בטן</a>
-			<a href="#">שקית אטומה למים</a>
-			<a href="#">משקפי שמש</a>
-			<a href="#">סנדלים</a>
-			<a href="#">נהלי הליכה</a>
-        </p>
-      </div>
-	  
-      <div class="page" id="category-hygene" style="height: 100%;width:10.6%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-          <a href="#" data-x="0" data-y="0">ציוד כללי</a> |
-		  <strong>היגיינה</strong> |
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> | 
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-			<strong>היגיינה</strong>
-			<a href="#">מברשת שיניים</a>
-			<a href="#">משחת שיניים</a>
-			<a href="#">סכין גילוח</a>
-			<a href="#">דאודורנט</a>
-			<a href="#">מראה קטנה</a>
-			<a href="#">פינצטה</a>
-			<a href="#">שמפו</a>
-			<a href="#">מרכך</a>
-			<a href="#">סבון גוף</a>
-			<a href="#">אלתוש</a>
-			<a href="#">קרם הגנה</a>
-			<a href="#">מגבת</a>
-			<a href="#">מגבונים לחים</a>
-        </p>
-      </div>
+	<div id="container" class="container" style="height: 100vh; width: 1500vh;top:-10vh;left:0;">
+		<div id="scene" class="scene">
+			
+			<div class="layer" id="layer1" data-depth="0.10" style="width:150%"><object data="images/layer1-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer2" data-depth="0.20" style="width:150%"><object data="images/layer2-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer3" data-depth="0.30" style="width:150%"><object data="images/layer3-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer4" data-depth="0.40" style="width:150%"><object data="images/layer4-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer5" data-depth="0.50" style="width:150%"><object data="images/layer5-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer6" data-depth="0.60" style="width:150%"><object data="images/layer6-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer7" data-depth="0.70" style="width:150%"><object data="images/layer7-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer8" data-depth="0.80" style="width:150%"><object data="images/layer8-01.svg" type="image/svg+xml"></object></div>
+			<div class="layer" id="layer9" data-depth="0.90" style="width:150%"><object data="images/layer9-01.svg" type="image/svg+xml"></object></div>
 
-      <div class="page x" id="category-clothes" style="height: 100%;width:13.5%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-          <a href="#" data-x="0" data-y="0">ציוד כללי</a> |
-		  <a href="#" data-x="0" data-y="0">היגיינה</a> | 
-		  <strong>ביגוד</strong> | 
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-			<strong>ביגוד</strong>
-			<a href="#">פליס</a>
-			<a href="#">מעיל גשם דק</a>
-			<a href="#">כובע</a>
-			<a href="#">תחתונים</a>
-			<a href="#">גרביים</a>
-			<a href="#">מכנסי טיול</a>
-			<a href="#">חולצות קצרות</a>
-			<a href="#">חולצות ארוכות</a>
-			<a href="#">מכנסי טרנינג לשינה</a>
-			<a href="#">בגד ים</a>
-			<a href="#">חזיות</a>
-			<a href="#">טייץ</a>
-        </p>
-      </div>
-	  
-      <div class="page" id="category-trekking" style="height: 100%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-          <a href="#" data-x="0" data-y="0">ציוד כללי</a> |
-		  <a href="#" data-x="0" data-y="0">היגיינה</a> | 
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> |
-		  <strong>טראקים</strong> | 
-		  <a href="#" data-x="0" data-y="0">אחר</a>
-        </p>
-        <p class="body">
-			<strong>טראקים</strong>
-			<a href="#">פנס ראש</a>
-			<a href="#">סוללות לפנס</a>
-			<a href="#">מקלות הליכה</a>
-			<a href="#">אולר</a>
-			<a href="#">מצית</a>
-			<a href="#">גזיה</a>
-			<a href="#">סכו"ם</a>
-			<a href="#">צלחת</a>
-			<a href="#">אטמי אזניים</a>
-			<a href="#">שק שינה</a>
-			<a href="#">אוהל</a>
-			<a href="#">מזרן שטח</a>
-        </p>
-      </div>
-	  
-      <div class="page" id="category-other" style="height: 100%;">
-        <p class="menu">
-          <a href="#" data-x="1" data-y="0">מסמכים</a> |
-          <a href="#" data-x="0" data-y="0">ציוד כללי</a> |
-		  <a href="#" data-x="0" data-y="0">היגיינה</a> | 
-		  <a href="#" data-x="0" data-y="0">ביגוד</a> |
-		  <a href="#" data-x="0" data-y="0">טראקים</a> |
-		  <strong>אחר</strong> 
-		  
-        </p>
-        <p class="body">
-			<strong>למזל</strong>
-			<a href="#">מכתבים מהבית</a>
-			<a href="#">אבן מזל</a>
-			<a href="#">תהילים</a>
-			<a href="#">יומן</a>
-			<a href="#">סקצ'בוק</a>
+			
+		</div>
+	</div>
 
-        </p>
-      </div>
-	  
-    </div>
-  </div>
+	<!-- Scripts -->
+	<script src="parallax.js"></script>
+	<script src="compass.js"></script>
+	<script>
+
+	// Pretty simple huh?
+	var scene = document.getElementById('scene');
+	var parallax = new Parallax(scene);
+
+	</script>
 
 </body>
 </html>

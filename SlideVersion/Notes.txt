@@ -1,0 +1,7 @@
+* play with parallax V
+* Saparate into layers
+* Delete opacity gradients
+* Change workplace
+
+
+
