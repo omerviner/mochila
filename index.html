@@ -19,7 +19,8 @@
 			background: white;
 		}
 		body {
-			overflow-y: hidden;
+			/* overflow-y: hidden; */
+			overflow: hidden;
 		}
 		svg {
 			overflow: visible  
@@ -50,11 +51,11 @@
 			console.log(maxScrollLeft);
 			var leftPosition = $('body').scrollLeft();
 			console.log(leftPosition);
-			if (leftPosition > 15000){
+			if (leftPosition > 14800){
 				$('body').scrollLeft(200);
 			}
 			if (leftPosition < 200){
-				$('body').scrollLeft(15000);
+				$('body').scrollLeft(14800);
 			}
 			
 			console.log(left);
